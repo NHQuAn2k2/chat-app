@@ -261,10 +261,7 @@ const Messages = () => {
                 <ListItemAvatar>
                   <Avatar />
                 </ListItemAvatar>
-                <ListItemText
-                  primary={user[1].userInfo.displayName}
-                  secondary="Hello World!!!"
-                />
+                <ListItemText primary={user[1].userInfo.displayName} />
               </ListItemButton>
             ))}
         </List>
