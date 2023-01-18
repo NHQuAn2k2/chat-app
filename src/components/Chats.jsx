@@ -78,54 +78,62 @@ const Chats = () => {
         justifyContent: "center",
       }}
     >
+      {!chats && (
+        <Typography sx={{ textAlign: "center" }} variant="h4">
+          No Room Chat
+        </Typography>
+      )}
       {chats && state.user && (
+        <>
+          <Box
+            sx={{
+              padding: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Avatar />
+              <Typography variant="body2">{state.user.displayName}</Typography>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <IconButton>
+                <CallIcon />
+              </IconButton>
+              <IconButton>
+                <VideocamIcon />
+              </IconButton>
+              <IconButton>
+                <InfoIcon />
+              </IconButton>
+            </Stack>
+          </Box>
+          <Divider />
+        </>
+      )}
+      {chats && (
         <Box
           sx={{
-            padding: 2,
+            flex: 1,
+            paddingY: 3,
+            paddingX: 2,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            flexDirection: "column",
+            rowGap: 3,
+            overflow: "auto",
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <Avatar />
-            <Typography variant="body2">{state.user.displayName}</Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <IconButton>
-              <CallIcon />
-            </IconButton>
-            <IconButton>
-              <VideocamIcon />
-            </IconButton>
-            <IconButton>
-              <InfoIcon />
-            </IconButton>
-          </Stack>
-        </Box>
-      )}
-
-      <Divider />
-      <Box
-        sx={{
-          flex: 1,
-          paddingY: 3,
-          paddingX: 2,
-          display: "flex",
-          flexDirection: "column",
-          rowGap: 3,
-          overflow: "auto",
-        }}
-      >
-        {chats &&
-          chats.map((chat) => (
+          {chats.map((chat) => (
             <Message
               owner={currentUser?.uid === chat.senderId}
               key={chat.id}
               chat={chat}
             />
           ))}
-      </Box>
+        </Box>
+      )}
+
       {chats && (
         <BoxStyled>
           <TextField
